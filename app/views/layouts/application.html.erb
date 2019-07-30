@@ -1,61 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WorkoutApp</title>
+    <title>Workspace</title>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <header role="banner">
-      <nav class="navbar navbar-default navbar-fixed-top" role="vavigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button"
-            class="navbar-toggle"
-            data-toggle="#bs-example-navbar-collapse-1"
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <%= link_to 'Athletes Den', root_path, class:"navbar-brand" %>
-          </div>
-          <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class=" active">
-                <%= link_to 'Home', root_path %>
-              </li>
-            </ul>
-            <ul class= "nav navbar-nav navbar-right">
-              <% unless user_signed_in? %>
-                <li><%= link_to "Sign up", new_user_registration_path %></li>
-                <li><%= link_to "Sign in", new_user_session_path %></li>
-              <% else %>
-                <li><%= link_to "My Lounge", user_exercises_path(current_user) %></li>
-                <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-                <div class="navbar-right signed-in-user">
-                  <p class="navbar-text">
-                    Signed in as <%= "#{current_user.email}" %>
-                  </p>
-                </div>
-              <% end %>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <div class="row">
-      <div class="row">
-        <div class="col-md-12">
-          <% flash.each do |key, message| %>
-            <div class="text-center alert
-                        alert-<%= key == 'notice' ? 'success' : 'danger' %>">
-              <%= message %>
-            </div>
-          <% end %>
-      <%= yield %>
-    </div>
+    <%= render 'shared/header' %>
+    
+    <%= render 'shared/main' %>
+    
+    <%= render 'shared/footer' %>
+    
   </body>
 </html>
