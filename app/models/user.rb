@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :exercises     
+  has_many :exercises    
+
+  validates :first_name, :last_name, presence: true 
 
   def full_name
   	[first_name, last_name].join(" ")
