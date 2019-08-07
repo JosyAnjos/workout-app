@@ -30,6 +30,7 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'devise'
 gem 'jquery-ui-rails', '5.0.5'
+gem 'd3-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
