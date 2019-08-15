@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.feature "Listing Exercises" do
   before do
     @john =  User.create(first_name: "John", last_name: "Doe", email: "john@example.com", password: "password")
+    @sara =  User.create(first_name: "Sara", last_name: "Doe", email: "sara@example.com", password: "password")
     
     login_as(@john)
     
@@ -14,9 +15,11 @@ RSpec.feature "Listing Exercises" do
                                   workout: "Weight lifting",
                                   workout_date: 2.days.ago)
 
-    @e3 = @john.exercises.create(duration_in_min: 35,
-                                  workout: "On treadmill",
-                                  workout_date: 8.days.ago)
+    @following = Friendship.create(user: @john, friend: @sara )
+
+    #@e3 = @john.exercises.create(duration_in_min: 35,
+                                  #workout: "On treadmill",
+                                 # workout_date: 8.days.ago)
                                   
   end
   
@@ -33,9 +36,9 @@ RSpec.feature "Listing Exercises" do
     expect(page).to have_content(@e2.workout)
     expect(page).to have_content(@e2.workout_date)
     
-    expect(page).not_to have_content(@e3.duration_in_min)
-    expect(page).not_to have_content(@e3.workout)
-    expect(page).not_to have_content(@e3.workout_date)
+    #expect(page).not_to have_content(@e3.duration_in_min)
+    #expect(page).not_to have_content(@e3.workout)
+    #expect(page).not_to have_content(@e3.workout_date)
   end
 
   scenario "shows no exercises if none created" do
@@ -47,4 +50,23 @@ RSpec.feature "Listing Exercises" do
     
     expect(page).to have_content('No Workouts Yet')
   end
+
+  scenario "shows a list of user's friends" do
+    visit "/"
+
+    click_link "My Lounge"
+    expect(page).to have_content("My Friends")
+    expect(page).to have_link(@sara.full_name)
+    expect(page).to have_link("Unfollow")
+  end  
+
 end
+
+
+
+
+
+
+
+
+
