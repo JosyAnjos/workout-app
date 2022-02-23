@@ -7,11 +7,11 @@ class MessagesController < ApplicationController
 
     @message.save
     redirect_to user_exercises_path(current_user)
-  end  
+  end
 
   private
 
   def message_params
     params.require(:message).permit(:body)
-  end  
-end  
+  end
+end

@@ -1,24 +1,22 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  after_create :create_chatroom       
+  after_create :create_chatroom
 
   has_many :exercises
   has_many :friendships
   has_many :friends, through: :friendships, class_name: "User"
   has_one :room
   has_many :messages
-  
-  validates :first_name, :last_name, presence: true 
+
+  validates :first_name, :last_name, presence: true
 
   self.per_page = 10
 
   def full_name
   	[first_name, last_name].join(" ")
-  end 	
+  end
 
   def self.search_by_name(name)
     names_array = name.split(' ')
@@ -36,20 +34,17 @@ class User < ApplicationRecord
 
   def follows_or_same?(new_friend)
     friendships.map(&:friend).include?(new_friend) || self == new_friend
-  end  
+  end
 
   def current_friendship(friend)
     friendships.where(friend: friend).first
-  end  
+  end
 
-  def create_chatroom 
+  def create_chatroom
     hyphenated_username = self.full_name.split.join('-')
     Room.create(name: hyphenated_username, user_id: self.id)
-  end  
-
+  end
 end
-
-
 
 
 

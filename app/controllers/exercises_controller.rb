@@ -8,13 +8,13 @@ class ExercisesController < ApplicationController
     @message = Message.new
     @messages = current_room.messages if current_room
     @followers = Friendship.where(friend_id: current_user.id)
-  end  
+  end
 
-  def show; end  
+  def show; end
 
   def new
     @exercise = current_user.exercises.new
-  end  
+  end
 
   def create
   	@exercise = current_user.exercises.new(exercise_params)
@@ -25,10 +25,10 @@ class ExercisesController < ApplicationController
     else
     	flash.now[:alert] = "Exercise has not been created"
       render :new
-    end		
-  end 
+    end
+  end
 
-  def edit; end  
+  def edit; end
 
   def update
     if @exercise.update(exercise_params)
@@ -37,32 +37,32 @@ class ExercisesController < ApplicationController
     else
       flash[:alert] = "Exercise has not been updated"
       render :edit
-    end  
-  end  
+    end
+  end
 
   def destroy
     @exercise.destroy
     flash[:notice] = "Exercise has been deleted"
     redirect_to user_exercises_path(current_user)
-  end  
+  end
 
   private
 
   def set_exercise
     @exercise = current_user.exercises.find params[:id]
-  end  
+  end
 
   def exercise_params
-    params.require(:exercise).permit(:duration_in_min, :workout, :workout_date, :user_id)
-  end	
-
+    params.require(:exercise).permit(:duration_in_min, :workout,
+                                     :workout_date, :user_id
+                                    )
+  end
   def set_current_room
     if params[:roomId]
       @room = Room.find_by(id: params[:roomID])
     else
       @room = current_user.room
-    end  
+    end
     session[:current_room] = @room.id if @room
-  end  
-
-end  
+  end
+end

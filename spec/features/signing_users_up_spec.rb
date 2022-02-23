@@ -11,8 +11,6 @@ feature "User signup" do
     fill_in "Password confirmation", with: "password"
     click_button "Sign up"
 
-    #expect(page). have_content("You have signed up successfully.")
-    
     user = User.last
     room = user.room
     room_name = user.full_name.split.join('-')

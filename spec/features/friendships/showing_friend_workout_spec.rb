@@ -34,5 +34,4 @@ RSpec.feature "Showing Friend Workout" do
     expect(page).to have_content(@e2.workout)
     expect(page).to have_css("div#chart")
   end
-
 end

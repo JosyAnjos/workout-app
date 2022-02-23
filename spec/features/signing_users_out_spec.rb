@@ -2,8 +2,13 @@ require "rails_helper"
 
 feature "Signing users out" do
   before do
-    @john = User.create!(first_name: "John", last_name: "Doe", email: "john@example.com",
-                     password: "password")
+    @john = User.create!(
+                          first_name: "John",
+                          last_name: "Doe",
+                          email: "john@example.com",
+                          password: "password"
+                        )
+
     visit '/'
     click_link "Sign in"
     fill_in "Email", with: @john.email
