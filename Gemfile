@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'devise'
-gem 'jquery-ui-rails', '5.0.5'
+gem 'jquery-ui-rails', '6.0.0'
 gem 'd3-rails'
 gem 'will_paginate-bootstrap'
 gem 'bootsnap', '>= 1.1.0', require: false
